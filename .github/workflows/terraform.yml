@@ -11,6 +11,7 @@ jobs:
   terraform:
     name: 'Deploy - ${{ github.ref_name }}'
     runs-on: ubuntu-latest
+    if: ${{ github.ref_name == 'main' }} == prd | ${{ github.ref_name == 'staging' }} == staging | ${{ github.ref_name == 'development' }} == dev
     environment: ${{ github.ref_name }}
 
     steps:
