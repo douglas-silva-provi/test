@@ -31,13 +31,8 @@ jobs:
     name: 'Deploy - ${{ github.ref_name }}'
     runs-on: ubuntu-latest
     environment: ${{ steps.env.outputs.environment }}
-
+  
     steps:
-    - name: If conditions
-      uses: |
-        if github.ref_name == main 
-        else if
-    
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
