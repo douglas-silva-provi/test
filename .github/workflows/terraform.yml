@@ -31,7 +31,7 @@ jobs:
     needs: [envs]
     name: 'Deploy - ${{ github.ref_name }}'
     runs-on: ubuntu-latest
-    environment: ${{ steps.env.outputs.environment }}
+    environment: ${{ needs.envs.outputs.environment }}
   
     steps:
     # Checkout the repository to the GitHub Actions runner
