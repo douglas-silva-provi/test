@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '14.x'
 
-      - uses: Install dependencies
+      - name: Install dependencies
         run: npm i --also=dev
 
       - uses: docker-practice/actions-setup-docker@master
