@@ -17,11 +17,11 @@ jobs:
       id: env
       run: |
         if [ "${{ github.ref_name == 'main' }} ]; then
-          echo "::set-output environment::prd"
+          echo "::set-output name=environment::prd"
         elif [ "${{ github.ref_name == 'staging' }} ]; then
-          echo "::set-output environment::staging"
+          echo "::set-output name=environment::staging"
         else
-          echo "::set-output environment::development"
+          echo "::set-output name=environment::dev"
         fi
         
     outputs: 
