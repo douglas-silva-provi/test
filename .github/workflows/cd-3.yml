@@ -9,7 +9,6 @@ on:
     
 jobs:
   envs:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: 'Set environment'
     runs-on: ubuntu-latest
     
@@ -29,6 +28,7 @@ jobs:
       environment: ${{ steps.env.outputs.environment }}
       
   terraform:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     needs: [envs]
     name: 'Deploy - ${{ needs.envs.outputs.environment }}'
     runs-on: ubuntu-latest
