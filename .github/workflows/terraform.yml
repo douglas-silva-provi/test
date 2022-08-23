@@ -8,13 +8,36 @@ on:
     - development
     
 jobs:
+  envs:
+    name: 'Set environemnt'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 'Define environment'
+      id: env
+      run: |
+        if [ "${{ github.ref_name == 'main' }} ]; then
+          echo "::set-output environment::prd"
+        elif [ "${{ github.ref_name == 'staging' }} ]; then
+          echo "::set-output environment::staging"
+        else
+          echo "::set-output environment::development"
+        fi
+        
+    outputs: 
+      environment: ${{ steps.env.outputs.environment }}
+      
   terraform:
     name: 'Deploy - ${{ github.ref_name }}'
     runs-on: ubuntu-latest
-    if: ${{ github.ref_name == 'main' }} == prd | ${{ github.ref_name == 'staging' }} == staging | ${{ github.ref_name == 'development' }} == dev
-    environment: ${{ github.ref_name }}
+    environment: ${{ steps.env.outputs.environment }}
 
     steps:
+    - name: If conditions
+      uses: |
+        if github.ref_name == main 
+        else if
+    
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
